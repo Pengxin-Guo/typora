@@ -1,0 +1,2 @@
+# typora
+Some notes
