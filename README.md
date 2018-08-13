@@ -1,2 +1,2 @@
 # typora
-Some notes and task
+Some notes
