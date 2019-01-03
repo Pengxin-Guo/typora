@@ -107,3 +107,64 @@
 
    - 浅拷贝：拷贝之后物理状态相同，对象里面有指针的话会指向同一地址空间。
    - 深拷贝：逻辑状态相同。
+
+9. 初始化列表
+
+   以下情况必须使用初始化列表对成员变量初始化：
+
+   - `const`成员属性；
+   - 类属性且这个类中有带参构造函数时；
+
+   两种实现初始化列表的方法：
+
+   ```c++
+   class Value {
+   private:
+       int i;
+   public:
+       Value(int a) : i(a) {
+           cout << "Value :: i = " << i << endl;
+       }
+   };
+   
+   class Test {
+   private:
+       const int i;
+       int j;
+       Value v1;
+       Value v2;
+       Value v3;
+   public:
+       /*
+       Test(int a, int b) : i(a), j(b), v1(1), v3(3), v2(2) {
+           cout << "i = " << i << endl;
+       }*/
+       Test(int a, int b);
+   };
+   
+   Test::Test(int a, int b) : i(a), j(b), v1(1), v3(3), v2(2) {
+       cout << "i = " << i << endl;
+       cout << "j = " << j << endl;
+   }
+   ```
+
+   注：初始化列表初始化顺序与成员变量声明顺序相同，与初始化列表中的顺序无关；初始化列表优先于函数体执行。
+
+10. 对象的构造顺序与析构顺序
+
+    - 构造顺序：先父母，再朋友，最后自己；
+
+    - 析构顺序：与构造顺序相反；（先构造的后析构）
+    - 因为C++标准中没有规定全局对象的构造顺序，故不同编译器实现的就不同，所以尽量不要使用全局对象；
+
+11. `const`对象、`const`成员变量和`const`方法
+
+    - `const`可以修饰一个对象，只不过这个对象是只读的；
+
+    - `const`对象只能调用`const`方法；
+
+      注：`const`方法：`int getI() const {}`
+
+    - `const`方法只能调用`const`方法；
+
+    - `const`方法也能与普通成员方法构成重载关系；
