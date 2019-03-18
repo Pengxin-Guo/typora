@@ -1,2 +1,2 @@
 # typora
-Some notes
+海贼课程笔记
